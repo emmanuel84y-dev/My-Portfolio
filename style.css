@@ -1,0 +1,318 @@
+/* --- 1. Variables & Reset --- */
+:root {
+    --bg-main: #0F1014;
+    --bg-card: #1A1C23;
+    --bg-darker: #15171D;
+    --bg-input: #0A0B0E;
+    --accent: #4F94FF;
+    --accent-hover: #6BA8FF;
+    --text-white: #FFFFFF;
+    --text-muted: #A0A4B0;
+    --border: rgba(255, 255, 255, 0.08);
+    --radius: 12px;
+    /* Unified spacing system */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 48px;
+    --space-xl: 80px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-size: 16px; 
+}
+
+/* Container Logic */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Add this to your style.css */
+section {
+    scroll-margin-top: 80px; /* Adjust this number if your navbar height changes */
+}
+
+img { max-width: 100%; height: auto; display: block; }
+.section-pad {
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-xl);
+}
+
+@media (max-width: 900px) {
+    .section-pad { padding: var(--space-lg) 0; }
+}
+
+@media (max-width: 600px) {
+    .section-pad { padding: calc(var(--space-lg) - 12px) 0; }
+} /* Larger default padding for desktop */
+.bg-darker { background: var(--bg-darker); }
+.highlight { color: var(--accent); }
+
+/* --- 2. Typography --- */
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 30px; }
+h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; }
+p { color: var(--text-muted); font-size: 1rem; }
+
+/* --- 3. Buttons --- */
+.btn {
+    display: inline-block; padding: 14px 28px; border-radius: 8px; font-weight: 700;
+    text-decoration: none; transition: 0.3s; border: none; cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-highlight { background: var(--accent); color: #000; width: 100%; text-align: center; }
+.btn-highlight:hover { background: var(--accent-hover); box-shadow: 0 0 20px rgba(79, 148, 255, 0.3); }
+.btn-sm { padding: 10px 20px; font-size: 0.9rem; }
+
+/* --- 4. Navigation (Sticky & Elegant) --- */
+#navbar {
+    position: sticky; /* Changed from fixed to sticky */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(15, 16, 20, 0.95); /* Slightly less transp to hide content under sticky */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 800; color: #fff; text-decoration: none; }
+.nav-links { list-style: none; display: flex; gap: 30px; align-items: center; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* --- 5. Hero --- */
+#hero {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+} /* Reduced top pad since nav is sticky */
+.hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-lg); align-items: center; }
+.badge {
+    background: rgba(79, 148, 255, 0.1); color: var(--accent);
+    padding: 6px 12px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+    display: inline-block; margin-bottom: 20px;
+}
+.hero-sub { margin-bottom: 30px; max-width: 500px; }
+.img-frame { border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-card); }
+
+/* --- About Edit --- */
+/* --- About Grid Styling --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr; /* Image slightly narrower than text */
+    gap: 60px;
+    align-items: center;
+    margin-top: 64px;
+}
+
+.about-image .img-frame {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+}
+.about-content p + p {
+    margin-top: var(--space-sm);
+}
+.about-content {
+    max-width: 600px; /* Ensures text doesn't stretch too far */
+}
+
+/* --- Mobile Adjustment for About Grid --- */
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        gap: 40px;
+        text-align: left;
+    }
+    
+    .about-image {
+        max-width: 400px; /* Don't let it get too huge on mobile */
+        margin: 0 auto;
+    }
+}
+
+/* --- 6. Stats & Services --- */
+.stats-grid { display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 30px; }
+.stat-item h3 { font-size: 2.5rem; color: var(--text-white); margin-bottom: 5px; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 64px auto; }
+.service-card { background: var(--bg-card); padding: 32px; border-radius: var(--radius); border: 1px solid var(--border); }
+.icon-box { color: var(--accent); margin-bottom: 20px; }
+
+/* --- 7. Tech Stack --- */
+.tech-stack-section {
+    overflow: hidden;
+    background: var(--bg-darker);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+}
+
+.tech-item {
+    padding-right: 40px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* --- 8. Products --- */
+.products-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+.product-card { background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
+.product-img-wrapper { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+.product-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.product-card:hover .product-img-wrapper img { transform: scale(1.08); }
+.product-info { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+.product-info p { margin-bottom: 20px; }
+.live-link { margin-top: auto; color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; }
+.live-link:hover { text-decoration: underline; }
+
+/* --- 9. Testimonials & Contact --- */
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.testimonial-card { background: var(--bg-card); padding: 30px; border-radius: var(--radius); overflow-wrap: break-word; hyphens: auto; border-left: 3px solid var(--accent); }
+.client { display: block; margin-top: 15px; color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+
+.contact-box-grid { background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); overflow: break-word; }
+
+.contact-left,
+.contact-right {
+    overflow-wrap: break-word;
+}
+.contact-left { padding: clamp(30px, 5vw, 50px); border-right: 1px solid var(--border); }
+.contact-right { padding: clamp(30px, 5vw, 50px); background: var(--bg-darker); }
+.styled-form { display: flex; flex-direction: column; gap: 20px; }
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-sm);
+}
+input, textarea { background: var(--bg-input); border: 1px solid var(--border); padding: 16px; border-radius: 8px; color: #fff; font-family: inherit; font-size: 1rem; }
+input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+
+/* --- 10. Custom Alert & Footer --- */
+.custom-alert {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.custom-alert.active { opacity: 1; pointer-events: all; }
+.alert-content {
+    background: #232630; border: 1px solid var(--accent);
+    padding: 40px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.alert-content h4 { color: var(--accent); margin-bottom: 10px; font-size: 1.4rem; }
+.alert-content button { margin-top: 20px; padding: 10px 24px; background: var(--accent); color: #000; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+/* Alert Error State */
+.alert-content.error { border-color: var(--accent); }
+.alert-content.error h4 { color: var(--accent); }
+.alert-content.error button { background-color: var(--accent); color: white; }
+
+.footer { border-top: 1px solid var(--border); padding: 80px 0 40px; margin-top: 60px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+.footer-col h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 20px; font-size: 0.85rem; }
+.footer-col a { display: block; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; transition: 0.3s; }
+.footer-col a:hover { color: var(--accent); }
+
+/* --- 11. Responsive Logic --- */
+.hamburger { display: none; cursor: pointer; }
+
+/* Elegant Hamburger Styling */
+.bar {
+    display: block; width: 24px; height: 2px; /* Thinner, shorter */
+    background: #fff; margin: 5px auto;
+    border-radius: 4px; /* Rounder */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animation to X */
+.hamburger.is-active .bar:nth-child(2) { opacity: 0; }
+.hamburger.is-active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.is-active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .container { padding: 0 20px !important; }
+
+@media (max-width: 900px) {
+    /* Strict Mobile Padding Fix */
+    .container { padding: 0 20px !important; }
+    input, textarea, .styled-form { width: 100%; /* Takes up 100% of the parent width */ max-width: 100%; /* Prevents it from expanding beyond parent */ box-sizing: border-box; /* Ensures padding doesn't add to the width */ } 
+    .tech-stack-section .container { padding: 0 !important; }
+    
+    /* Ensure clear separation between sections on mobile */
+    .section-pad { padding: 60px 0; } 
+    #hero { padding-top: 40px; padding-bottom: 40px; }
+
+    /* Layout Shifts */
+    .hero-grid { grid-template-columns: 1fr; text-align: left; }
+    .hero-image { order: -1; margin-bottom: 30px; }
+    .products-2x2, .services-grid, .form-row { grid-template-columns: 1fr; }
+    .contact-box-grid { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .footer-grid { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; }
+
+    /* Mobile Menu - Seamless Integration */
+    .hamburger { display: block; }
+    .nav-links {
+        display: block; /* Use block to enable opacity transitions */
+        position: absolute;
+        top: 100%; /* Drops exactly below the navbar */
+        left: 0;
+        width: 100%;
+        background: rgba(15, 16, 20, 0.95); /* Same as navbar */
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        padding: 0;
+        
+        /* Transition Logic */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+    }
+    
+    .nav-links.active {
+        max-height: 400px; /* Enough to show content */
+        opacity: 1;
+        padding-bottom: 20px;
+    }
+
+    /* List Item Separation */
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.03); /* Thin, faint line */
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 20px 0;
+    }
+    
+    /* Move button inside list slightly */
+    .nav-links li:last-child { border-bottom: none; padding: 20px; }
+}
+
+.fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
